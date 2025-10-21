@@ -1,0 +1,207 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      UserRole @default(INSPECTEUR)
+  bureau    String?
+  telephone String?
+  actif     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  missions            Mission[]
+  documents           Document[]
+  notifications       Notification[]
+  actionsResponsable  ActionCorrectrice[] @relation("ResponsableActions")
+}
+
+enum UserRole {
+  ADMIN
+  CHEF_SERVICE
+  INSPECTEUR
+  ARCHIVISTE
+}
+
+model Entreprise {
+  id                    String            @id @default(cuid())
+  nom                   String
+  type                  TypeEntreprise
+  adresse               String
+  ville                 String
+  telephone             String?
+  email                 String?
+  numeroAutorisation    String?
+  dateAutorisation      DateTime?
+  responsable           String?
+  telephoneResponsable  String?
+  statut                StatutEntreprise  @default(ACTIVE)
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+
+  missions              Mission[]
+  documents             Document[]
+}
+
+enum TypeEntreprise {
+  HOTEL
+  HOPITAL
+  PHARMACIE
+  CENTRE_SANTE
+  CLINIQUE
+  LABORATOIRE
+  RESTAURANT
+  AUTRE
+}
+
+enum StatutEntreprise {
+  ACTIVE
+  SUSPENDUE
+  FERMEE
+}
+
+model Mission {
+  id                String        @id @default(cuid())
+  reference         String        @unique
+  type              TypeMission
+  bureau            String
+  entrepriseId      String
+  entreprise        Entreprise    @relation(fields: [entrepriseId], references: [id], onDelete: Cascade)
+  inspecteurId      String
+  inspecteur        User          @relation(fields: [inspecteurId], references: [id])
+  dateDebut         DateTime
+  dateFin           DateTime?
+  but               String
+  statut            StatutMission @default(EN_COURS)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  constats          Constat[]
+  infractions       Infraction[]
+  actionsCorrectrice ActionCorrectrice[]
+  documents         Document[]
+}
+
+enum TypeMission {
+  INSPECTION_CONTROLE
+  ENCADREMENT
+  AUDIT
+  ENQUETE
+}
+
+enum StatutMission {
+  PLANIFIEE
+  EN_COURS
+  TERMINEE
+  ANNULEE
+}
+
+model Constat {
+  id          String   @id @default(cuid())
+  missionId   String
+  mission     Mission  @relation(fields: [missionId], references: [id], onDelete: Cascade)
+  description String
+  categorie   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Infraction {
+  id          String   @id @default(cuid())
+  missionId   String
+  mission     Mission  @relation(fields: [missionId], references: [id], onDelete: Cascade)
+  description String
+  gravite     Gravite  @default(MOYENNE)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Gravite {
+  FAIBLE
+  MOYENNE
+  GRAVE
+}
+
+model ActionCorrectrice {
+  id                String   @id @default(cuid())
+  missionId         String
+  mission           Mission  @relation(fields: [missionId], references: [id], onDelete: Cascade)
+  deficience        String
+  actionCorrectrice String
+  echeance          DateTime
+  responsableId     String
+  responsable       User     @relation("ResponsableActions", fields: [responsableId], references: [id])
+  observations      String?
+  statut            StatutAction @default(EN_ATTENTE)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+enum StatutAction {
+  EN_ATTENTE
+  EN_COURS
+  TERMINEE
+  RETARD
+}
+
+model Document {
+  id            String        @id @default(cuid())
+  titre         String
+  type          TypeDocument
+  description   String?
+  fichier       String
+  taille        Int
+  entrepriseId  String?
+  entreprise    Entreprise?   @relation(fields: [entrepriseId], references: [id], onDelete: SetNull)
+  missionId     String?
+  mission       Mission?      @relation(fields: [missionId], references: [id], onDelete: SetNull)
+  uploadParId   String
+  uploadPar     User          @relation(fields: [uploadParId], references: [id])
+  tags          String?
+  statut        StatutDocument @default(ACTIF)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+enum TypeDocument {
+  RAPPORT_INSPECTION
+  AUTORISATION
+  CERTIFICAT
+  CORRESPONDANCE
+  PHOTO
+  PLAN_REDRESSEMENT
+  AUTRE
+}
+
+enum StatutDocument {
+  ACTIF
+  ARCHIVE
+}
+
+model Notification {
+  id        String             @id @default(cuid())
+  userId    String
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  titre     String
+  message   String
+  type      TypeNotification
+  lue       Boolean            @default(false)
+  createdAt DateTime           @default(now())
+}
+
+enum TypeNotification {
+  MISSION_ASSIGNEE
+  ECHEANCE_PROCHE
+  ACTION_RETARD
+  NOUVEAU_DOCUMENT
+  SYSTEME
+}
