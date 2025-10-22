@@ -14,36 +14,37 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import Link from "next/link"
 
 const navItems = [
   {
     title: "Tableau de bord",
-    url: "/dashboard",
+    url: "/web",
     icon: Home,
   },
   {
     title: "Entreprises",
-    url: "/entreprises",
+    url: "/web/entreprises",
     icon: Building2,
   },
   {
     title: "Missions",
-    url: "/missions",
+    url: "/web/missions",
     icon: ClipboardList,
   },
   {
     title: "Documents",
-    url: "/documents",
+    url: "/web/documents",
     icon: FileText,
   },
   {
     title: "Rapports",
-    url: "/rapports",
+    url: "/web/rapports",
     icon: BarChart3,
   },
   {
     title: "Utilisateurs",
-    url: "/utilisateurs",
+    url: "/web/utilisateurs",
     icon: Users,
   },
 ]
@@ -79,10 +80,10 @@ export function AppSidebar() {
                     isActive={pathname === item.url}
                     className="rounded-lg transition-all duration-200 hover:bg-accent/80 data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-semibold"
                   >
-                    <a href={item.url} className="flex items-center gap-3 px-3 py-2">
+                    <Link href={item.url} className="flex items-center gap-3 px-3 py-2">
                       <item.icon className="h-5 w-5" />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -94,10 +95,10 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="rounded-lg transition-all duration-200 hover:bg-accent/80">
-              <a href="/parametres" className="flex items-center gap-3 px-3 py-2">
+              <Link href="/web/parametres" className="flex items-center gap-3 px-3 py-2">
                 <Settings className="h-5 w-5" />
                 <span>Paramètres</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
