@@ -52,29 +52,36 @@ export function AppSidebar() {
   const pathname = usePathname()
 
   return (
-    <Sidebar>
-      <SidebarHeader className="border-b border-border/50 px-6 py-6">
+    <Sidebar className="border-r border-border/40">
+      <SidebarHeader className="border-b border-border/40 px-6 py-5">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/20">
+          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-primary to-emerald-600 shadow-lg shadow-primary/25">
             <ClipboardList className="h-5 w-5 text-white" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-black/20 to-transparent" />
           </div>
           <div className="flex flex-col">
-            <span className="text-base font-bold tracking-tight">IPS</span>
+            <span className="text-lg font-bold tracking-tight">IPS</span>
             <span className="text-xs text-muted-foreground">Gestion de missions</span>
           </div>
         </div>
       </SidebarHeader>
       <SidebarContent className="px-3 py-4">
         <SidebarGroup>
-          <SidebarGroupLabel className="px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">Navigation</SidebarGroupLabel>
-          <SidebarGroupContent className="mt-2">
+          <SidebarGroupLabel className="px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-2">
+            Navigation
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
             <SidebarMenu className="space-y-1">
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={pathname === item.url} className="rounded-lg transition-all duration-200 hover:bg-accent/80">
-                    <a href={item.url}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname === item.url}
+                    className="rounded-lg transition-all duration-200 hover:bg-accent/80 data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-semibold"
+                  >
+                    <a href={item.url} className="flex items-center gap-3 px-3 py-2">
                       <item.icon className="h-5 w-5" />
-                      <span className="font-medium">{item.title}</span>
+                      <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -83,13 +90,13 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t border-border/50 p-4">
+      <SidebarFooter className="border-t border-border/40 p-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="rounded-lg transition-all duration-200 hover:bg-accent/80">
-              <a href="/parametres">
+              <a href="/parametres" className="flex items-center gap-3 px-3 py-2">
                 <Settings className="h-5 w-5" />
-                <span className="font-medium">Paramètres</span>
+                <span>Paramètres</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
