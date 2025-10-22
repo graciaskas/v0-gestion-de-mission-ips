@@ -81,23 +81,23 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Tableau de bord</h1>
-        <p className="text-muted-foreground mt-2">Vue d'ensemble de l'inspection provinciale de santé</p>
+        <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">Tableau de bord</h1>
+        <p className="text-muted-foreground mt-3 text-base">Vue d'ensemble de l'inspection provinciale de santé</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => {
           const Icon = stat.icon
           return (
             <Link key={stat.title} href={stat.href}>
-              <Card className="hover:bg-accent transition-colors cursor-pointer">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-                  <Icon className="h-4 w-4 text-muted-foreground" />
+              <Card className="hover:bg-accent/50 transition-all duration-300 cursor-pointer border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 group bg-card/50 backdrop-blur-sm">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+                  <CardTitle className="text-sm font-semibold text-muted-foreground group-hover:text-foreground transition-colors">{stat.title}</CardTitle>
+                  <Icon className="h-5 w-5 text-muted-foreground/60 group-hover:text-primary transition-colors" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{stat.value}</div>
-                  <p className="text-xs text-muted-foreground mt-1">{stat.description}</p>
+                  <div className="text-3xl font-bold tracking-tight">{stat.value}</div>
+                  <p className="text-xs text-muted-foreground/80 mt-2">{stat.description}</p>
                 </CardContent>
               </Card>
             </Link>
@@ -105,28 +105,30 @@ export default function DashboardPage() {
         })}
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Missions récentes</CardTitle>
-            <CardDescription>Dernières missions d'inspection</CardDescription>
+      <div className="grid gap-5 md:grid-cols-2">
+        <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-xl font-bold">Missions récentes</CardTitle>
+            <CardDescription className="text-muted-foreground/80">Dernières missions d'inspection</CardDescription>
           </CardHeader>
           <CardContent>
             {recentMissions.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">Aucune mission enregistrée</p>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {recentMissions.map((mission) => (
-                  <div key={mission.id} className="flex items-start gap-3 pb-3 border-b last:border-0">
-                    <ClipboardList className="h-4 w-4 text-muted-foreground mt-1" />
-                    <div className="flex-1 space-y-1">
-                      <p className="text-sm font-medium leading-none">{mission.type}</p>
-                      <p className="text-sm text-muted-foreground">{mission.entrepriseNom}</p>
-                      <p className="text-xs text-muted-foreground">
+                  <div key={mission.id} className="flex items-start gap-3 pb-3 border-b border-border/50 last:border-0 hover:bg-accent/30 -mx-3 px-3 py-2 rounded-lg transition-colors">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+                      <ClipboardList className="h-4 w-4 text-primary" />
+                    </div>
+                    <div className="flex-1 space-y-1.5">
+                      <p className="text-sm font-semibold leading-none">{mission.type}</p>
+                      <p className="text-sm text-muted-foreground/90">{mission.entrepriseNom}</p>
+                      <p className="text-xs text-muted-foreground/70">
                         {new Date(mission.dateDebut).toLocaleDateString("fr-FR")}
                       </p>
                     </div>
-                    <div className="text-xs text-muted-foreground">{mission.statut}</div>
+                    <div className="text-xs text-muted-foreground/80 font-medium">{mission.statut}</div>
                   </div>
                 ))}
               </div>
@@ -134,27 +136,29 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Actions correctrices en attente</CardTitle>
-            <CardDescription>Plans de redressement à suivre</CardDescription>
+        <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-xl font-bold">Actions correctrices en attente</CardTitle>
+            <CardDescription className="text-muted-foreground/80">Plans de redressement à suivre</CardDescription>
           </CardHeader>
           <CardContent>
             {actionsCorrectricesEnAttente.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">Aucune action en attente</p>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {actionsCorrectricesEnAttente.map((action) => (
-                  <div key={action.id} className="flex items-start gap-3 pb-3 border-b last:border-0">
-                    <CheckCircle2 className="h-4 w-4 text-blue-500 mt-1" />
-                    <div className="flex-1 space-y-1">
-                      <p className="text-sm font-medium leading-none">{action.deficienceConstatee}</p>
-                      <p className="text-sm text-muted-foreground">{action.entrepriseNom}</p>
-                      <p className="text-xs text-muted-foreground">
+                  <div key={action.id} className="flex items-start gap-3 pb-3 border-b border-border/50 last:border-0 hover:bg-accent/30 -mx-3 px-3 py-2 rounded-lg transition-colors">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+                      <CheckCircle2 className="h-4 w-4 text-primary" />
+                    </div>
+                    <div className="flex-1 space-y-1.5">
+                      <p className="text-sm font-semibold leading-none">{action.deficienceConstatee}</p>
+                      <p className="text-sm text-muted-foreground/90">{action.entrepriseNom}</p>
+                      <p className="text-xs text-muted-foreground/70">
                         Échéance: {new Date(action.echeance).toLocaleDateString("fr-FR")}
                       </p>
                     </div>
-                    <div className="text-xs text-muted-foreground">{action.statut}</div>
+                    <div className="text-xs text-muted-foreground/80 font-medium">{action.statut}</div>
                   </div>
                 ))}
               </div>
@@ -163,36 +167,42 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total des infractions</CardTitle>
-            <AlertTriangle className="h-4 w-4 text-orange-500" />
+      <div className="grid gap-5 md:grid-cols-3">
+        <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:bg-accent/30 transition-all">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground">Total des infractions</CardTitle>
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-500/10">
+              <AlertTriangle className="h-5 w-5 text-orange-500" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{totalInfractions}</div>
-            <p className="text-xs text-muted-foreground mt-1">Faits infractionnels constatés</p>
+            <div className="text-3xl font-bold tracking-tight">{totalInfractions}</div>
+            <p className="text-xs text-muted-foreground/80 mt-2">Faits infractionnels constatés</p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Missions terminées</CardTitle>
-            <CheckCircle2 className="h-4 w-4 text-green-500" />
+        <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:bg-accent/30 transition-all">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground">Missions terminées</CardTitle>
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
+              <CheckCircle2 className="h-5 w-5 text-primary" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{missions.filter((m) => m.statut === "Terminée").length}</div>
-            <p className="text-xs text-muted-foreground mt-1">Inspections complétées</p>
+            <div className="text-3xl font-bold tracking-tight">{missions.filter((m) => m.statut === "Terminée").length}</div>
+            <p className="text-xs text-muted-foreground/80 mt-2">Inspections complétées</p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Taux de conformité</CardTitle>
-            <BarChart3 className="h-4 w-4 text-blue-500" />
+        <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:bg-accent/30 transition-all">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground">Taux de conformité</CardTitle>
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
+              <BarChart3 className="h-5 w-5 text-primary" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-3xl font-bold tracking-tight">
               {missions.length > 0
                 ? Math.round(
                     ((missions.length - missions.filter((m) => m.faitsInfractionnels.length > 0).length) /
@@ -202,7 +212,7 @@ export default function DashboardPage() {
                 : 0}
               %
             </div>
-            <p className="text-xs text-muted-foreground mt-1">Entreprises conformes</p>
+            <p className="text-xs text-muted-foreground/80 mt-2">Entreprises conformes</p>
           </CardContent>
         </Card>
       </div>
