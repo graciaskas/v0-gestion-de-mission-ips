@@ -36,7 +36,7 @@ export default function DashboardPage() {
       <div className="space-y-8">
         <div>
           <h1 className="text-4xl font-bold tracking-tight">Tableau de bord</h1>
-          <p className="text-muted-foreground mt-3 text-base">Chargement...</p>
+          <p className=" mt-3 text-base">Chargement...</p>
         </div>
       </div>
     )
@@ -107,7 +107,7 @@ export default function DashboardPage() {
         <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent">
           Tableau de bord
         </h1>
-        <p className="text-muted-foreground mt-3 text-base">Vue d'ensemble de l'inspection provinciale de santé</p>
+        <p className=" mt-3 text-base">Vue d'ensemble de l'inspection provinciale de santé</p>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -117,21 +117,21 @@ export default function DashboardPage() {
             <Link key={stat.title} href={stat.href}>
               <Card className="group relative overflow-hidden border-border/40 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 cursor-pointer">
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+                  className={`absolute inset-0 bg-gradient-to-br ${stat.gradient}  opacity-5 transition-opacity duration-300`}
                 />
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-                  <CardTitle className="text-sm font-semibold text-muted-foreground group-hover:text-foreground transition-colors">
+                  <CardTitle className="text-sm font-semibold  text-foreground transition-colors">
                     {stat.title}
                   </CardTitle>
                   <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${stat.gradient} opacity-10 group-hover:opacity-20 transition-opacity`}
+                    className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${stat.gradient} opacity-20 transition-opacity`}
                   >
                     <Icon className="h-5 w-5 text-foreground" />
                   </div>
                 </CardHeader>
                 <CardContent>
                   <div className="text-3xl font-bold tracking-tight">{stat.value}</div>
-                  <p className="text-xs text-muted-foreground/80 mt-2">{stat.description}</p>
+                  <p className="text-xs /80 mt-2">{stat.description}</p>
                 </CardContent>
               </Card>
             </Link>
@@ -143,11 +143,11 @@ export default function DashboardPage() {
         <Card className="border-border/40 bg-card/50 backdrop-blur-sm">
           <CardHeader className="pb-4">
             <CardTitle className="text-xl font-bold">Missions récentes</CardTitle>
-            <CardDescription className="text-muted-foreground/80">Dernières missions d'inspection</CardDescription>
+            <CardDescription className="/80">Dernières missions d'inspection</CardDescription>
           </CardHeader>
           <CardContent>
             {recentMissions.length === 0 ? (
-              <p className="text-sm text-muted-foreground text-center py-8">Aucune mission enregistrée</p>
+              <p className="text-sm  text-center py-8">Aucune mission enregistrée</p>
             ) : (
               <div className="space-y-2">
                 {recentMissions.map((mission) => (
@@ -160,12 +160,12 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1 space-y-1.5 min-w-0">
                       <p className="text-sm font-semibold leading-none truncate">{mission.type}</p>
-                      <p className="text-sm text-muted-foreground/90 truncate">{mission.entrepriseNom}</p>
-                      <p className="text-xs text-muted-foreground/70">
+                      <p className="text-sm /90 truncate">{mission.entrepriseNom}</p>
+                      <p className="text-xs /70">
                         {new Date(mission.dateDebut).toLocaleDateString("fr-FR")}
                       </p>
                     </div>
-                    <div className="text-xs text-muted-foreground/80 font-medium shrink-0">{mission.statut}</div>
+                    <div className="text-xs /80 font-medium shrink-0">{mission.statut}</div>
                   </div>
                 ))}
               </div>
@@ -176,11 +176,11 @@ export default function DashboardPage() {
         <Card className="border-border/40 bg-card/50 backdrop-blur-sm">
           <CardHeader className="pb-4">
             <CardTitle className="text-xl font-bold">Actions correctrices en attente</CardTitle>
-            <CardDescription className="text-muted-foreground/80">Plans de redressement à suivre</CardDescription>
+            <CardDescription className="/80">Plans de redressement à suivre</CardDescription>
           </CardHeader>
           <CardContent>
             {actionsCorrectricesEnAttente.length === 0 ? (
-              <p className="text-sm text-muted-foreground text-center py-8">Aucune action en attente</p>
+              <p className="text-sm  text-center py-8">Aucune action en attente</p>
             ) : (
               <div className="space-y-2">
                 {actionsCorrectricesEnAttente.map((action) => (
@@ -193,12 +193,12 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1 space-y-1.5 min-w-0">
                       <p className="text-sm font-semibold leading-none truncate">{action.deficienceConstatee}</p>
-                      <p className="text-sm text-muted-foreground/90 truncate">{action.entrepriseNom}</p>
-                      <p className="text-xs text-muted-foreground/70">
+                      <p className="text-sm /90 truncate">{action.entrepriseNom}</p>
+                      <p className="text-xs /70">
                         Échéance: {new Date(action.echeance).toLocaleDateString("fr-FR")}
                       </p>
                     </div>
-                    <div className="text-xs text-muted-foreground/80 font-medium shrink-0">{action.statut}</div>
+                    <div className="text-xs /80 font-medium shrink-0">{action.statut}</div>
                   </div>
                 ))}
               </div>
@@ -209,24 +209,24 @@ export default function DashboardPage() {
 
       <div className="grid gap-5 md:grid-cols-3">
         <Card className="border-border/40 bg-card/50 backdrop-blur-sm hover:border-orange-500/30 transition-all group">
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-500 opacity-0 group-hover:opacity-5 transition-opacity rounded-lg" />
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-500  opacity-5 transition-opacity rounded-lg" />
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground">Total des infractions</CardTitle>
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-red-500 opacity-10 group-hover:opacity-20 transition-opacity">
+            <CardTitle className="text-sm font-semibold ">Total des infractions</CardTitle>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-red-500 opacity-10 opacity-20 transition-opacity">
               <AlertTriangle className="h-5 w-5 text-foreground" />
             </div>
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold tracking-tight">{totalInfractions}</div>
-            <p className="text-xs text-muted-foreground/80 mt-2">Faits infractionnels constatés</p>
+            <p className="text-xs /80 mt-2">Faits infractionnels constatés</p>
           </CardContent>
         </Card>
 
         <Card className="border-border/40 bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-all group">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary to-emerald-600 opacity-0 group-hover:opacity-5 transition-opacity rounded-lg" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary to-emerald-600  opacity-5 transition-opacity rounded-lg" />
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground">Missions terminées</CardTitle>
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-emerald-600 opacity-10 group-hover:opacity-20 transition-opacity">
+            <CardTitle className="text-sm font-semibold ">Missions terminées</CardTitle>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-emerald-600 opacity-10 opacity-20 transition-opacity">
               <CheckCircle2 className="h-5 w-5 text-foreground" />
             </div>
           </CardHeader>
@@ -234,15 +234,15 @@ export default function DashboardPage() {
             <div className="text-3xl font-bold tracking-tight">
               {missions.filter((m) => m.statut === "Terminée").length}
             </div>
-            <p className="text-xs text-muted-foreground/80 mt-2">Inspections complétées</p>
+            <p className="text-xs /80 mt-2">Inspections complétées</p>
           </CardContent>
         </Card>
 
         <Card className="border-border/40 bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-all group">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary to-emerald-600 opacity-0 group-hover:opacity-5 transition-opacity rounded-lg" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary to-emerald-600  opacity-5 transition-opacity rounded-lg" />
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground">Taux de conformité</CardTitle>
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-emerald-600 opacity-10 group-hover:opacity-20 transition-opacity">
+            <CardTitle className="text-sm font-semibold ">Taux de conformité</CardTitle>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-emerald-600 opacity-10 opacity-20 transition-opacity">
               <BarChart3 className="h-5 w-5 text-foreground" />
             </div>
           </CardHeader>
@@ -257,7 +257,7 @@ export default function DashboardPage() {
                 : 0}
               %
             </div>
-            <p className="text-xs text-muted-foreground/80 mt-2">Entreprises conformes</p>
+            <p className="text-xs /80 mt-2">Entreprises conformes</p>
           </CardContent>
         </Card>
       </div>
