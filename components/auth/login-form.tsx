@@ -41,7 +41,7 @@ export function LoginForm() {
       }
 
       console.log("[v0] Login successful, redirecting to dashboard")
-      router.push("/dashboard")
+      router.push("/web")
       router.refresh()
     } catch (err) {
       console.error("[v0] Login fetch error:", err)

@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb"
 import { NotificationCenter } from "@/components/notifications/notification-center"
 import { UserMenu } from "@/components/auth/user-menu"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function DashboardLayout({
   children,
@@ -21,11 +22,12 @@ export default function DashboardLayout({
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/dashboard">Accueil</BreadcrumbLink>
+                <BreadcrumbLink href="/web">Accueil</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
           <div className="ml-auto flex items-center gap-2">
+            <ThemeToggle />
             <NotificationCenter />
             <UserMenu />
           </div>

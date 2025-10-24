@@ -54,7 +54,7 @@ export default function DashboardPage() {
       value: entreprises.length.toString(),
       description: "Total des établissements",
       icon: Building2,
-      href: "/entreprises",
+      href: "/web/entreprises",
       gradient: "from-blue-500 to-cyan-500",
     },
     {
@@ -62,7 +62,7 @@ export default function DashboardPage() {
       value: missionsEnCours.toString(),
       description: "Missions actives",
       icon: ClipboardList,
-      href: "/missions",
+      href: "/web/missions",
       gradient: "from-primary to-emerald-500",
     },
     {
@@ -78,7 +78,7 @@ export default function DashboardPage() {
       value: actionsEnAttente.toString(),
       description: "Plans de redressement",
       icon: Clock,
-      href: "/rapports",
+      href: "/web/rapports",
       gradient: "from-orange-500 to-red-500",
     },
   ]

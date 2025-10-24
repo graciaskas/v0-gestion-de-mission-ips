@@ -53,7 +53,7 @@ export function AppSidebar() {
   const pathname = usePathname()
 
   return (
-    <Sidebar className="border-r border-border/40">
+    <Sidebar className="bg-black border-r border-border/40">
       <SidebarHeader className="border-b border-border/40 px-6 py-5">
         <div className="flex items-center gap-3">
           <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-primary to-emerald-600 shadow-lg shadow-primary/25">
